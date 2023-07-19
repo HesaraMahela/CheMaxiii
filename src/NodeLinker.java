@@ -21,7 +21,7 @@ public class NodeLinker {
     }
     public void draw(Graphics2D g){
         g.setColor(this.color);
-        g.drawLine(node1.x, node1.y, node2.x, node2.y);
+        g.drawLine(node1.x + 12, node1.y-5, node2.x - 5, node2.y-5);
     }
 
 }

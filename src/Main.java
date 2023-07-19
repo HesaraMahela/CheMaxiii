@@ -11,7 +11,8 @@ public class Main {
         // Create the main frame
         JFrame frame = new JFrame("Che Maxii");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+        BorderLayout borderLayout =new BorderLayout(10,10);
+        frame.setLayout(borderLayout);
         //add mainMenu
         MainMenu mainMenu = new MainMenu();
         mainMenu.setMenu(frame);
@@ -25,6 +26,14 @@ public class Main {
 
         frame.add(canvas, BorderLayout.CENTER);
 
+        // add a label TEMP
+        //JLabel label = new JLabel("Tool bar");
+        Toolbar toolbar = new Toolbar();
+        JLabel top_label = new JLabel("future something");
+        frame.add(top_label,BorderLayout.NORTH);
+        frame.add(toolbar,BorderLayout.WEST);
+
+
 
         Node N1 =new Node(100,300,"c");
         Node N2 =new Node(300,300,"c");
@@ -37,40 +46,10 @@ public class Main {
         canvas.setPreferredSize(new Dimension(300, 300));
 
         // Add key listener to the frame
-        canvas.addMouseListener(new MouseAdapter() { // TODO:make a different class to handle all key and mouse events
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-                canvas.addNode(new Node(x,y,"C"));
-                System.out.println("Mouse clicked at position: (" + x + ", " + y + ")");
-            }
-        });
-        frame.addKeyListener(new KeyListener() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // Check if the Space key is pressed
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    // Add a new item at a random position
-
-                    // Set the updated items on the canvas
-                   int number =(int) (Math.random() * 256);
-                   String num= String.valueOf(number);
-                   canvas.addNode(100,100,num);
-
-                }
-            }
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                // Not used
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // Not used
-            }
-        });
+        CanvasMouseAdapter mouseAdapter = new CanvasMouseAdapter(canvas);
+        canvas.addMouseListener(mouseAdapter);
+        canvas.addMouseMotionListener(mouseAdapter);
+        frame.addKeyListener(new MainKeyListener(canvas));
 
         // Enable key events for the frame
         frame.setFocusable(true);

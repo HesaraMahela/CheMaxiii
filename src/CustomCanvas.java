@@ -4,10 +4,23 @@ import javax.swing.JPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 public class CustomCanvas extends JPanel{
+// TODO: fix the center of positioning 
 
+    public ArrayList<Node> nodes = new ArrayList<Node>();
+    public ArrayList<NodeLinker> Linkers = new ArrayList<NodeLinker>();
 
-    private ArrayList<Node> nodes = new ArrayList<Node>();
-    private ArrayList<NodeLinker> Linkers = new ArrayList<NodeLinker>();
+    public Node getNodeAt(int x, int y) {
+        //System.out.println("JJJJJJJ");
+        for (Node node : nodes) {
+            int nodeX = node.getX();
+            int nodeY = node.getY();
+            int distanceSquared = (x - nodeX) * (x - nodeX) + (y - nodeY) * (y - nodeY);
+            if (distanceSquared <= node.getRadius() * node.getRadius()) {
+                return node;
+            }
+        }
+        return null;
+    }
 
     public void addNode(int x, int y , String name){
         nodes.add(new Node(x,y, name));
@@ -44,6 +57,31 @@ public class CustomCanvas extends JPanel{
                 L.draw(g2D);
             }
         }
+
+        // Draw circle around the hovered node
+        CanvasMouseAdapter mouseListener = (CanvasMouseAdapter) getMouseListeners()[0];
+        Node hoveredNode = mouseListener.getHoveredNode();
+        Node selectedNode = mouseListener.getSelectedNode();
+        if (hoveredNode != null) {
+            int x = hoveredNode.getX();
+            int y = hoveredNode.getY();
+            int radius = hoveredNode.getRadius();
+
+            g.setColor(Color.BLUE);
+            g.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
+
+        }
+
+        if (selectedNode != null){
+            int x = selectedNode.getX();
+            int y = selectedNode.getY();
+            int radius = selectedNode.getRadius();
+            g.setColor(Color.GREEN);
+            g.drawOval(x - radius, y - radius, 2 * radius, 2 * radius);
+
+        }
+
     }
 
 }
