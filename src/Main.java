@@ -31,6 +31,7 @@ public class Main {
         Toolbar toolbar = new Toolbar();
         JLabel top_label = new JLabel("future something");
         frame.add(top_label,BorderLayout.NORTH);
+        canvas.setToolbar(toolbar);
         frame.add(toolbar,BorderLayout.WEST);
 
 

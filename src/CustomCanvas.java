@@ -1,6 +1,8 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 public class CustomCanvas extends JPanel{
@@ -8,6 +10,8 @@ public class CustomCanvas extends JPanel{
 
     public ArrayList<Node> nodes = new ArrayList<Node>();
     public ArrayList<NodeLinker> Linkers = new ArrayList<NodeLinker>();
+
+    public Toolbar toolbar;
 
     public Node getNodeAt(int x, int y) {
         //System.out.println("JJJJJJJ");
@@ -84,4 +88,28 @@ public class CustomCanvas extends JPanel{
 
     }
 
+
+    public void addTextNode(int x, int y) {
+        final JTextField[] textField = {new JTextField()};
+        textField[0].setBounds(x, y, 100, 25);
+        textField[0].addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = textField[0].getText();
+                addNode(new Node(textField[0].getX(), textField[0].getY(), text));
+                remove(textField[0]);
+                textField[0] = null;
+                repaint();
+            }
+        });
+        add(textField[0]);
+        textField[0].requestFocus();
+    }
+
+    public ToolBarButton getSelectedButton() {
+        return toolbar.getSelectedButton();
+    }
+    public void setToolbar(Toolbar toolbar){
+        this.toolbar =toolbar;
+    }
 }

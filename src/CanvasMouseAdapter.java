@@ -1,9 +1,7 @@
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
+import javax.swing.*;
+import java.awt.event.*;
 
-public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListener {
+public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListener, KeyListener {
     private final CustomCanvas canvas;
     public CanvasMouseAdapter(CustomCanvas canvas) {
         this.canvas = canvas;
@@ -13,17 +11,30 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
 
     private Node selectedNode;
 
+    private boolean textToolSelected = false;
+    private JTextField tempTextField;
+
     @Override
     public void mouseClicked(MouseEvent e) {
+        // TODO: get the selected button and then perform the actions regarding to the selected button
         int x = e.getX();
         int y = e.getY();
         if (canvas.getNodeAt(x, y) != null){
             selectedNode = canvas.getNodeAt(x,y);
             canvas.repaint();
-        }else {
-            canvas.addNode(new Node(x, y, "c"));
-            System.out.println("Mouse is clicked at position: (" + x + ", " + y + ")");
-            super.mouseClicked(e);
+
+        }else if (canvas.getSelectedButton() != null) {
+
+            String selectedButtonText = canvas.getSelectedButton().getText();
+            if (selectedButtonText.equals("Text Tool")) {
+                // todo : multiple text box appearing / select tool is not working
+                tempTextField = new JTextField();
+                tempTextField.setBounds(x, y, 100, 25);
+                tempTextField.addKeyListener(this);
+                canvas.add(tempTextField);
+                tempTextField.requestFocus();
+                textToolSelected = true;
+            }
         }
     }
 
@@ -101,4 +112,27 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     public Node getSelectedNode() {
         return selectedNode;
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (textToolSelected && e.getKeyCode() == KeyEvent.VK_ENTER) {
+            String text = tempTextField.getText();
+            canvas.addNode(new Node(tempTextField.getX(), tempTextField.getY(), text));
+            canvas.remove(tempTextField);
+            tempTextField = null;
+            textToolSelected = false;
+            canvas.repaint();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
 }

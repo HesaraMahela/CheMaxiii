@@ -7,7 +7,8 @@
     <list default="true" id="efd8e069-e70a-4db7-84fb-57dc1585ccb7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CanvasMouseAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CanvasMouseAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ToolBarButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ToolBarButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CustomCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CustomCanvas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Toolbar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Toolbar.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +27,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
     <option name="showPreview" value="true" />
   </component>
   <component name="ProjectId" id="2SBQC0IXza53abVVsShnMlcEMNw" />
@@ -72,7 +73,7 @@
       <workItem from="1689691110087" duration="384000" />
       <workItem from="1689693003177" duration="1073000" />
       <workItem from="1689733303475" duration="13435000" />
-      <workItem from="1689829341798" duration="1573000" />
+      <workItem from="1689829341798" duration="7514000" />
     </task>
     <servers />
   </component>
