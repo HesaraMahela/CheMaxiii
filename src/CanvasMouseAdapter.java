@@ -31,7 +31,7 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     public void mouseDragged(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        saySomething("dragged",e);
+        //saySomething("dragged",e);
         if (canvas.getNodeAt(x, y) != null ){
 
             if(prevDraggedNode == null){

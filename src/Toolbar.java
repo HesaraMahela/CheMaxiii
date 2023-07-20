@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class Toolbar extends JPanel {
+public class Toolbar extends JPanel implements ActionListener {
+    ArrayList<ToolBarButton> barButtons = new ArrayList<ToolBarButton>();
 
-
-    private ToolBarButtons selectedButton;
+    private ToolBarButton selectedButton;
     public Toolbar() {
         super(new GridLayout(10,2,5,9));
         addButtons();
@@ -12,14 +15,41 @@ public class Toolbar extends JPanel {
 
     private void addButtons(){
         // TODO : this buttons should be a class with minimum with
-        ToolBarButtons B1 = new ToolBarButtons("1");
-        ToolBarButtons B2 = new ToolBarButtons("2");
-        ToolBarButtons B3 = new ToolBarButtons("3");
-        this.add(B1);
-        this.add(B2);
-        this.add(B3);
+        ToolBarButton B1 = new ToolBarButton("1", this);
+        ToolBarButton B2 = new ToolBarButton("2", this);
+        ToolBarButton B3 = new ToolBarButton("3", this);
+
+        barButtons.add(B1);
+        barButtons.add(B2);
+        barButtons.add(B3);
+        displayButtons();
 
     }
 
+    private void displayButtons(){
+        for (ToolBarButton button: barButtons) {
+            this.add(button);
+        }
+    }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for (ToolBarButton button: barButtons) {
+            if (e.getSource() == button){
+                selectedButton =button;
+                selectedButton.setBackground(Color.red);
+            }else {
+                button.setBackground(Color.white);
+                // TODO: fix this to make the colour normal
+            }
+
+        }
+    }
+
+
+
+    public ToolBarButton getSelectedButton(){
+        return selectedButton;
+    }
 }
