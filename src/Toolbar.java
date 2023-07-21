@@ -16,8 +16,8 @@ public class Toolbar extends JPanel implements ActionListener {
     private void addButtons(){
         // TODO : this buttons should be a class with minimum with
         ToolBarButton B1 = new ToolBarButton("Text Tool", this);
-        ToolBarButton B2 = new ToolBarButton("2", this);
-        ToolBarButton B3 = new ToolBarButton("3", this);
+        ToolBarButton B2 = new ToolBarButton("rectangle", this);
+        ToolBarButton B3 = new ToolBarButton("----", this);
 
         barButtons.add(B1);
         barButtons.add(B2);
@@ -39,6 +39,7 @@ public class Toolbar extends JPanel implements ActionListener {
             if (e.getSource() == button){
                 selectedButton =button;
                 selectedButton.setBackground(Color.red);
+                // this selectedButton will be asked by the mouse adapter and perform the relevant task
             }else {
                 button.setBackground(Color.white);
                 // TODO: fix this to make the colour normal

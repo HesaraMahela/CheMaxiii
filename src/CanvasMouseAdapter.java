@@ -42,29 +42,21 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     public void mouseDragged(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        //saySomething("dragged",e);
-        if (canvas.getNodeAt(x, y) != null ){
 
-            if(prevDraggedNode == null){
-                prevDraggedNode = canvas.getNodeAt(x, y);
+        if (canvas.getSelectedButton() != null) {
+            String selectedButtonText = canvas.getSelectedButton().getText();
+            if (selectedButtonText.equals("----")) {
+                drawLinker(x,y);
 
-            }else {
-
-                canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y)));
+            }else if(selectedButtonText.equals("rectangle")){
+                // TODO: overload the drawLinker method to plot different linkers for that linker class has to be modified
             }
-
         }
 
 
+
     }
 
-    void saySomething(String eventDescription, MouseEvent e) {
-        System.out.println(eventDescription
-                + " (" + e.getX() + "," + e.getY() + ")"
-                + " detected on "
-                + e.getComponent().getClass().getName()
-                + "\n");
-    }
 
 
 
@@ -125,7 +117,7 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
             canvas.addNode(new Node(tempTextField.getX(), tempTextField.getY(), text));
             canvas.remove(tempTextField);
             tempTextField = null;
-            textToolSelected = false; // TODO: is this useless
+            textToolSelected = false; // TODO: is this useless??
             canvas.repaint();
         }
     }
@@ -133,6 +125,20 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    private void drawLinker(int x, int y){
+        if (canvas.getNodeAt(x, y) != null ){
+
+            if(prevDraggedNode == null){
+                prevDraggedNode = canvas.getNodeAt(x, y);
+
+            }else {
+
+                canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y)));
+            }
+
+        }
     }
 
 }
