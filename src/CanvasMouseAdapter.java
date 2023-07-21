@@ -26,8 +26,8 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
         }else if (canvas.getSelectedButton() != null) {
 
             String selectedButtonText = canvas.getSelectedButton().getText();
-            if (selectedButtonText.equals("Text Tool")) {
-                // todo : multiple text box appearing / select tool is not working
+            if (selectedButtonText.equals("Text Tool") && tempTextField ==null) {
+                // todo : select tool is not working
                 tempTextField = new JTextField();
                 tempTextField.setBounds(x, y, 100, 25);
                 tempTextField.addKeyListener(this);
@@ -125,7 +125,7 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
             canvas.addNode(new Node(tempTextField.getX(), tempTextField.getY(), text));
             canvas.remove(tempTextField);
             tempTextField = null;
-            textToolSelected = false;
+            textToolSelected = false; // TODO: is this useless
             canvas.repaint();
         }
     }

@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Create the main frame
-        JFrame frame = new JFrame("Che Maxii");
+        JFrame frame = new JFrame("CheMaxiii");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout borderLayout =new BorderLayout(10,10);
         frame.setLayout(borderLayout);
