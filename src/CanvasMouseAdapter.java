@@ -1,11 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListener, KeyListener {
     private final CustomCanvas canvas;
+
     public CanvasMouseAdapter(CustomCanvas canvas) {
         this.canvas = canvas;
     }
+
     private Node hoveredNode;
     private Node prevDraggedNode;
 
@@ -14,19 +17,20 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     private boolean textToolSelected = false;
     private JTextField tempTextField;
 
+
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO: get the selected button and then perform the actions regarding to the selected button
         int x = e.getX();
         int y = e.getY();
-        if (canvas.getNodeAt(x, y) != null){
-            selectedNode = canvas.getNodeAt(x,y);
+        if (canvas.getNodeAt(x, y) != null) {
+            selectedNode = canvas.getNodeAt(x, y);
             canvas.repaint();
 
-        }else if (canvas.getSelectedButton() != null) {
+        } else if (canvas.getSelectedButton() != null) {
 
             String selectedButtonText = canvas.getSelectedButton().getText();
-            if (selectedButtonText.equals("Text Tool") && tempTextField ==null) {
+            if (selectedButtonText.equals("Text Tool") && tempTextField == null) {
                 // todo : select tool is not working
                 tempTextField = new JTextField();
                 tempTextField.setBounds(x, y, 100, 25);
@@ -40,23 +44,37 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
 
 
     public void mouseDragged(MouseEvent e) {
+        //TODO: when dragging it is better to see it temporally
         int x = e.getX();
         int y = e.getY();
 
         if (canvas.getSelectedButton() != null) {
             String selectedButtonText = canvas.getSelectedButton().getText();
             if (selectedButtonText.equals("----")) {
-                drawLinker(x,y);
-
-            }else if(selectedButtonText.equals("rectangle")){
+                drawLinker(x, y);
+                temporaryDraw(x,y);
+            } else if (selectedButtonText.equals("rectangle")) {
                 // TODO: overload the drawLinker method to plot different linkers for that linker class has to be modified
             }
-        }
+        }else {
 
+        }
 
 
     }
 
+    private void temporaryDraw(int x, int y){
+        if (canvas.getNodeAt(x, y) == null ){
+
+            if(prevDraggedNode != null) { // if first node was not selected
+
+                NodeLinker tempLinker = new NodeLinker(prevDraggedNode, new Node(x, y, ""));
+                canvas.setTempLinker(tempLinker);
+                canvas.repaint();
+            }
+            // TODO : removing the temporary linker has to be fixed when drag stops
+        }
+    }
 
 
 
@@ -77,6 +95,8 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
         super.mouseReleased(e);
         prevDraggedNode =null;
         System.out.println("Released");
+        canvas.unsetTempLinker();
+
     }
 
     @Override
@@ -130,7 +150,7 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     private void drawLinker(int x, int y){
         if (canvas.getNodeAt(x, y) != null ){
 
-            if(prevDraggedNode == null){
+            if(prevDraggedNode == null){ // if first node was not selected
                 prevDraggedNode = canvas.getNodeAt(x, y);
 
             }else {

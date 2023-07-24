@@ -8,13 +8,16 @@ import java.awt.event.MouseEvent;
 public class CustomCanvas extends JPanel{
 // TODO: fix the center of positioning 
 
-    public ArrayList<Node> nodes = new ArrayList<Node>();
-    public ArrayList<NodeLinker> Linkers = new ArrayList<NodeLinker>();
+    private ArrayList<Node> nodes = new ArrayList<Node>();
+    private ArrayList<NodeLinker> Linkers = new ArrayList<NodeLinker>();
 
     public Toolbar toolbar;
 
+    private NodeLinker tempLinker;
+
+
     public Node getNodeAt(int x, int y) {
-        //System.out.println("JJJJJJJ");
+
         for (Node node : nodes) {
             int nodeX = node.getX();
             int nodeY = node.getY();
@@ -28,6 +31,7 @@ public class CustomCanvas extends JPanel{
 
     public void addNode(int x, int y , String name){
         nodes.add(new Node(x,y, name));
+        System.out.println("node was added");
         repaint();
     }
 
@@ -38,6 +42,7 @@ public class CustomCanvas extends JPanel{
 
     public void addLinker(NodeLinker L){
         Linkers.add(L);
+        //System.out.println("nodeLinker was added");
         repaint();
     }
 
@@ -86,6 +91,12 @@ public class CustomCanvas extends JPanel{
 
         }
 
+        if(tempLinker!=null){
+            tempLinker.draw(g2D);
+        }
+
+
+
     }
 
 
@@ -111,5 +122,23 @@ public class CustomCanvas extends JPanel{
     }
     public void setToolbar(Toolbar toolbar){
         this.toolbar =toolbar;
+    }
+
+    public void removeTempNodeLinker(){
+        // Calculate index of last element
+        int index = Linkers.size() - 1;
+
+        // Delete last element by passing index
+        Linkers.remove(index);
+    }
+
+    public void setTempLinker(NodeLinker temp){
+        this.tempLinker =  temp;
+
+    }
+
+    public void unsetTempLinker() {
+        tempLinker =null;
+        repaint();
     }
 }
