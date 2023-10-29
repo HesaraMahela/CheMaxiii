@@ -64,10 +64,11 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
     }
 
     private void temporaryDraw(int x, int y){
+        // drawing the linker
         if (canvas.getNodeAt(x, y) == null ){
 
             if(prevDraggedNode != null) { // if first node was not selected
-
+//                System.out.println("drawing the linker");
                 NodeLinker tempLinker = new NodeLinker(prevDraggedNode, new Node(x, y, ""));
                 canvas.setTempLinker(tempLinker);
                 canvas.repaint();
@@ -154,8 +155,12 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
                 prevDraggedNode = canvas.getNodeAt(x, y);
 
             }else {
+                // addLinker checks is the link between same node
+                // get linker and check is the linker is added previously then add
+                if(canvas.getLinkerBetween(prevDraggedNode,canvas.getNodeAt(x, y)) ==null){
+                    canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y)));
+                }
 
-                canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y)));
             }
 
         }

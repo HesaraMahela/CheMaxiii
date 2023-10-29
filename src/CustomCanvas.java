@@ -28,6 +28,17 @@ public class CustomCanvas extends JPanel{
         }
         return null;
     }
+    public NodeLinker getLinkerBetween(Node prev, Node  next) {
+            NodeLinker temp = new NodeLinker(prev,next);
+        for (NodeLinker linker : Linkers) {
+            if (temp.node1==linker.node1 && temp.node2==linker.node2 ) {
+                return linker;
+            }else if (temp.node1==linker.node2 && temp.node2==linker.node1 ) {
+                return linker;
+            }
+        }
+        return null;
+    }
 
     public void addNode(int x, int y , String name){
         nodes.add(new Node(x,y, name));
@@ -41,9 +52,14 @@ public class CustomCanvas extends JPanel{
     }
 
     public void addLinker(NodeLinker L){
-        Linkers.add(L);
+        if(L.node1 != L.node2){
+            Linkers.add(L);
+            repaint();
+        }
+
         //System.out.println("nodeLinker was added");
-        repaint();
+        System.out.println(Linkers.size());
+
     }
 
     @Override

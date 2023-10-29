@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 public class Main {
-
+//initializing of the item happens hear
     public static void main(String[] args) {
         // Create the main frame
         JFrame frame = new JFrame("CheMaxiii");
@@ -40,14 +40,14 @@ public class Main {
         Node N2 =new Node(300,300,"c");
         canvas.addNode(N1);
         canvas.addNode(N2);
-        NodeLinker L1 = new NodeLinker(N1,N2);
-        canvas.addLinker(L1);
+        //NodeLinker L1 = new NodeLinker(N1,N2);
+        //canvas.addLinker(L1);
 
         // Set the preferred size of the canvas
         canvas.setPreferredSize(new Dimension(300, 300));
 
         // Add key listener to the frame
-        CanvasMouseAdapter mouseAdapter = new CanvasMouseAdapter(canvas);
+        CanvasMouseAdapter mouseAdapter = new CanvasMouseAdapter(canvas); // both mouse and  key listener
         canvas.addMouseListener(mouseAdapter);
         canvas.addMouseMotionListener(mouseAdapter);
         frame.addKeyListener(new MainKeyListener(canvas));
