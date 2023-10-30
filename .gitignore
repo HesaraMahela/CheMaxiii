@@ -27,4 +27,5 @@ bin/
 .idea/
 ### Mac OS ###
 .DS_Store
+chemaxii.iml
 chemfig-en.pdf

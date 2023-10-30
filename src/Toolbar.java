@@ -16,7 +16,7 @@ public class Toolbar extends JPanel implements ActionListener {
     private void addButtons(){
         // TODO : this buttons should be a class with minimum with
         ToolBarButton B1 = new ToolBarButton("Text Tool", this);
-        ToolBarButton B2 = new ToolBarButton("rectangle", this);
+        ToolBarButton B2 = new ToolBarButton("triangle", this);
         ToolBarButton B3 = new ToolBarButton("----", this);
 
         barButtons.add(B1);

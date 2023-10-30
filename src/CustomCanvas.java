@@ -73,6 +73,7 @@ public class CustomCanvas extends JPanel{
 
 
         if (nodes != null){
+
             for (Node node : nodes) {
                 node.draw(g2D);
             }

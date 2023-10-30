@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+//Mouse clicked takes care of clicking operations while Mouse dragged for linking
+// dragging
 public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListener, KeyListener {
     private final CustomCanvas canvas;
 
@@ -38,6 +39,8 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
                 canvas.add(tempTextField);
                 tempTextField.requestFocus();
                 textToolSelected = true;
+            }else if(selectedButtonText.equals("triangle")){
+
             }
         }
     }
@@ -49,13 +52,8 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
         int y = e.getY();
 
         if (canvas.getSelectedButton() != null) {
-            String selectedButtonText = canvas.getSelectedButton().getText();
-            if (selectedButtonText.equals("----")) {
-                drawLinker(x, y);
-                temporaryDraw(x,y);
-            } else if (selectedButtonText.equals("rectangle")) {
-                // TODO: overload the drawLinker method to plot different linkers for that linker class has to be modified
-            }
+             temporaryDraw(x,y);
+             drawLinker(x, y);
         }else {
 
         }
@@ -69,7 +67,12 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
 
             if(prevDraggedNode != null) { // if first node was not selected
 //                System.out.println("drawing the linker");
+                String selectedButtonText = canvas.getSelectedButton().getText();
                 NodeLinker tempLinker = new NodeLinker(prevDraggedNode, new Node(x, y, ""));
+
+                if(selectedButtonText.equals("triangle")){
+                    tempLinker.setBondType("triangle");
+                }
                 canvas.setTempLinker(tempLinker);
                 canvas.repaint();
             }
@@ -158,7 +161,13 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
                 // addLinker checks is the link between same node
                 // get linker and check is the linker is added previously then add
                 if(canvas.getLinkerBetween(prevDraggedNode,canvas.getNodeAt(x, y)) ==null){
-                    canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y)));
+                    String selectedButtonText = canvas.getSelectedButton().getText();
+
+                    if (selectedButtonText.equals("----")){
+                        canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y)));
+                    }else if (selectedButtonText.equals("triangle")){
+                        canvas.addLinker(new NodeLinker(prevDraggedNode,canvas.getNodeAt(x, y),"triangle"));
+                    }
                 }
 
             }
