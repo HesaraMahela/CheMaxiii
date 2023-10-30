@@ -26,7 +26,7 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
         int y = e.getY();
         if (canvas.getNodeAt(x, y) != null) {
             selectedNode = canvas.getNodeAt(x, y);
-            canvas.repaint();
+            canvas.repaint(); // todo: cant we call repaint in draw methods
 
         } else if (canvas.getSelectedButton() != null) {
 
@@ -39,9 +39,8 @@ public class CanvasMouseAdapter extends MouseAdapter implements MouseMotionListe
                 canvas.add(tempTextField);
                 tempTextField.requestFocus();
                 textToolSelected = true;
-            }else if(selectedButtonText.equals("triangle")){
-
             }
+            // todo : create a select tool to select nodes and linkers
         }
     }
 
