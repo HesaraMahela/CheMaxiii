@@ -13,9 +13,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         BorderLayout borderLayout =new BorderLayout(10,10);
         frame.setLayout(borderLayout);
-        //add mainMenu
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.setMenu(frame);
+
 
         // Create the canvas
         CustomCanvas canvas = new CustomCanvas();
@@ -25,6 +23,11 @@ public class Main {
         canvas.setLocation(200,200);
 
         frame.add(canvas, BorderLayout.CENTER);
+
+
+        //add mainMenu
+        MainMenu mainMenu = new MainMenu(canvas);
+        mainMenu.setMenu(frame);
 
         // add a label TEMP
         //JLabel label = new JLabel("Tool bar");
@@ -40,8 +43,8 @@ public class Main {
         Node N2 =new Node(300,300,"c");
         canvas.addNode(N1);
         canvas.addNode(N2);
-        //NodeLinker L1 = new NodeLinker(N1,N2);
-        //canvas.addLinker(L1);
+        NodeLinker L1 = new NodeLinker(N1,N2);
+        canvas.addLinker(L1);
 
         // Set the preferred size of the canvas
         canvas.setPreferredSize(new Dimension(300, 300));

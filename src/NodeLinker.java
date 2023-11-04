@@ -45,4 +45,17 @@ public class NodeLinker {
     public void setBondType(String bondType) {
         this.bondType = bondType;
     }
+
+    public boolean isIncluded(Node node){
+        return this.node1 == node || this.node2 ==node;
+    }
+
+    public Node otherNode(Node node){
+        if(this.node2 == node) {
+            return node1;
+        }else if(this.node1 == node) {
+            return node2;
+        }
+        return null;
+    }
 }

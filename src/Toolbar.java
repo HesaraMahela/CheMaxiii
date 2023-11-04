@@ -19,9 +19,11 @@ public class Toolbar extends JPanel implements ActionListener {
         ToolBarButton B2 = new ToolBarButton("triangle", this);
         ToolBarButton B3 = new ToolBarButton("----", this);
 
+
         barButtons.add(B1);
         barButtons.add(B2);
         barButtons.add(B3);
+
         displayButtons();
 
     }

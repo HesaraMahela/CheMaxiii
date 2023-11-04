@@ -158,4 +158,15 @@ public class CustomCanvas extends JPanel{
         tempLinker =null;
         repaint();
     }
+
+    public ArrayList<Node> getNodes(){
+        // pass data to formula
+        return nodes;
+    }
+
+    public ArrayList<NodeLinker> getLinks(){
+        // pass data to formula
+        return Linkers;
+    }
+
 }
